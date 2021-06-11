@@ -22,13 +22,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
+
 @Suppress("UNCHECKED_CAST")
 class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
     private lateinit var binding:ActivityMainBinding
+
     private lateinit var adapter: ListingAdapter
+    private  lateinit var detailAdapter : ListingDetailAdapter
 
     private var listingList = ArrayList<Listing>()
+    
+    private var detailListing = ArrayList<Listing>()
 
     private var progressBar : ProgressBar? = null
 
@@ -50,7 +55,16 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         adapter = ListingAdapter(listingList)
         binding.rvListings.setHasFixedSize(true)
         binding.rvListings.layoutManager = LinearLayoutManager(this)
+
         binding.rvListings.adapter = adapter
+
+        adapter.setOnItemClickListener(object : ListingAdapter.onItemClickListener{
+            override fun onItemClick(position: Int, id: Int) {
+                Toast.makeText(this@MainActivity, "Clickeaste aca $id" , Toast.LENGTH_SHORT).show()
+                getListing(id)
+            }
+
+        })
 
         progressBar = binding.pbLoading
 
@@ -58,6 +72,20 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             progressBar!!.visibility = View.INVISIBLE
         }
 
+    }
+
+    private fun initDetailListingView(listings: ListingsResponse)
+    {
+        if (listings.status=="200")
+        {
+            detailListing = (listings.result) as ArrayList<Listing>
+        }
+
+        detailAdapter = ListingDetailAdapter(detailListing)
+        binding.rvListings.setHasFixedSize(true)
+        binding.rvListings.layoutManager = LinearLayoutManager(this)
+
+        binding.rvListings.adapter = detailAdapter
 
     }
 
@@ -120,6 +148,26 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             }
 
         }
+    }
+
+    private fun getListing(id:Int)
+    {
+        CoroutineScope(Dispatchers.IO).launch {
+            val call: Response<ListingsResponse> = getRetrofit().create(APIService::class.java).getDetailListing("listings/get/$id")
+            val listing = call.body()
+
+            runOnUiThread {
+                if(listing?.status == "200")
+                {
+                    initDetailListingView(listing)
+                }
+                else
+                {
+                    showError()
+                }
+            }
+        }
+
     }
 
     private fun showError(){

@@ -13,4 +13,7 @@ interface APIService {
 
     @POST("/listings/search")
     suspend fun  getSearchListings(@Body requestBody: RequestBody): Response<ListingsResponse>
+
+    @GET
+    suspend fun getDetailListing(@Url url:String): Response<ListingsResponse>
 }

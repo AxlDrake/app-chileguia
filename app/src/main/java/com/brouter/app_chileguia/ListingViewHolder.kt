@@ -6,7 +6,7 @@ import com.brouter.app_chileguia.databinding.ItemListingBinding
 import com.squareup.picasso.Picasso
 
 
-class ListingViewHolder(view : View):RecyclerView.ViewHolder(view) {
+class ListingViewHolder(view : View, listener: ListingAdapter.onItemClickListener):RecyclerView.ViewHolder(view) {
 
     private val binding = ItemListingBinding.bind(view)
 
@@ -20,6 +20,18 @@ class ListingViewHolder(view : View):RecyclerView.ViewHolder(view) {
         }
         else{
             Picasso.get().load("https://www.chileguia.cl/assets/images/no-logo.png" ).into(binding.txtImage)
+        }
+
+
+
+    }
+
+    init {
+
+        itemView.setOnClickListener {
+
+            listener.onItemClick(adapterPosition, binding.tvId.text.toString().toInt())
+
         }
 
     }
