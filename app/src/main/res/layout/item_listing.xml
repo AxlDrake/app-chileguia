@@ -8,13 +8,14 @@
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_margin="5dp"
-
+    android:background="@drawable/border"
     >
 
     <ImageView
         android:id="@+id/txtImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:padding="5dp"
         />
 
     <LinearLayout

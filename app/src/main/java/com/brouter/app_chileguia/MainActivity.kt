@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 
     private var progressBar : ProgressBar? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -60,7 +62,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 
         adapter.setOnItemClickListener(object : ListingAdapter.onItemClickListener{
             override fun onItemClick(position: Int, id: Int) {
-                Toast.makeText(this@MainActivity, "Clickeaste aca $id" , Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@MainActivity, "Clickeaste aca $id" , Toast.LENGTH_SHORT).show()
                 getListing(id)
             }
 
