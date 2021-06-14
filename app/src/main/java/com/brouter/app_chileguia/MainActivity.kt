@@ -4,6 +4,7 @@ package com.brouter.app_chileguia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
@@ -38,14 +39,15 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
     private var progressBar : ProgressBar? = null
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         allListings()
 
         binding.svListings.setOnQueryTextListener(this)
+
     }
 
     private fun initListingsView(listings : ListingsResponse) {
@@ -127,6 +129,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 }
 
                 hideKeyboard()
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
             }
 
@@ -147,6 +150,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 } else {
                     showError()
                 }
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
             }
 
         }
@@ -167,6 +171,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 {
                     showError()
                 }
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
             }
         }
 
@@ -194,6 +199,15 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
     private fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.viewRoot.windowToken, 0)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        //Toast.makeText(this@MainActivity, "Clickeaste aca ${item.itemId}" , Toast.LENGTH_SHORT).show()
+
+        allListings()
+
+        return super.onOptionsItemSelected(item)
     }
 
 
