@@ -13,7 +13,7 @@ class ListingDetailViewHolder(view: View):RecyclerView.ViewHolder(view) {
     {
         binding.tvTitle.text = listing.title
         binding.tvId.text = listing.id.toString()
-        binding.tvDescription.text = listing.description
+        //
         binding.tvContactPerson.text = listing.contactPerson
         binding.tvEmail.text = listing.email
         binding.tvPhoneNumber.text = listing.phoneNumber

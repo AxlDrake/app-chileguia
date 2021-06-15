@@ -44,6 +44,11 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
+        supportActionBar?.setLogo(R.drawable.icon)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         allListings()
 
         binding.svListings.setOnQueryTextListener(this)
@@ -51,11 +56,9 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
     }
 
     private fun initListingsView(listings : ListingsResponse) {
-
         if(listings.status == "200"){
             listingList = (listings.result) as ArrayList<Listing>
         }
-
         adapter = ListingAdapter(listingList)
         binding.rvListings.setHasFixedSize(true)
         binding.rvListings.layoutManager = LinearLayoutManager(this)

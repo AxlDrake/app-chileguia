@@ -21,9 +21,6 @@ class ListingViewHolder(view : View, listener: ListingAdapter.onItemClickListene
         else{
             Picasso.get().load("https://www.chileguia.cl/assets/images/no-logo.png" ).into(binding.txtImage)
         }
-
-
-
     }
 
     init {
