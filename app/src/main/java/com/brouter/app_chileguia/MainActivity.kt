@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayUseLogoEnabled(true)
-        supportActionBar?.setLogo(R.drawable.icon)
+        supportActionBar?.setLogo(R.drawable.logo_white)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         allListings()

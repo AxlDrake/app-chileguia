@@ -19,7 +19,7 @@ class ListingViewHolder(view : View, listener: ListingAdapter.onItemClickListene
             Picasso.get().load("https://www.chileguia.cl/" + list.cover).into(binding.txtImage)
         }
         else{
-            Picasso.get().load("https://www.chileguia.cl/assets/images/no-logo.png" ).into(binding.txtImage)
+            Picasso.get().load(R.drawable.default_listing ).into(binding.txtImage)
         }
     }
 

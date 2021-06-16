@@ -23,7 +23,7 @@ class ListingDetailViewHolder(view: View):RecyclerView.ViewHolder(view) {
             Picasso.get().load("https://www.chileguia.cl/" + listing.cover).into(binding.imgLogo)
         }
         else{
-            Picasso.get().load("https://www.chileguia.cl/assets/images/no-logo.png" ).into(binding.imgLogo)
+            Picasso.get().load(R.drawable.default_listing ).into(binding.imgLogo)
         }
 
     }
